@@ -87,19 +87,19 @@ void *send_message(const char *peer_ip, int peer_port, void *payload, struct sen
     if (flags.received_message)
     {
         socklen_t addr_len = sizeof(peer_addr);
-        ssize_t received_bytes = recvfrom(udp_socket, &payload, sizeof(payload), 0,
-                                          (struct sockaddr *)&peer_addr, &addr_len);
+        ssize_t received_bytes = recvfrom(udp_socket, payload, sizeof(struct ntp_packet), 0,
+                                  (struct sockaddr *)&peer_addr, &addr_len);
 
-        if (received_bytes < 0)
-        {
+            if (received_bytes < sizeof(struct ntp_packet)) {
+            if (received_bytes < 0) {
+                perror("Error receiving message.");
+            } else {
+            fprintf(stderr, "Incomplete SNTP packet received (%zd bytes).\n", received_bytes);
+            }
             close_socket(udp_socket);
-            exit(1);
+            return NULL;
         }
 
-        close_socket(udp_socket);
-    } else {
-        return NULL;
-    }
 
     return payload;
 }
