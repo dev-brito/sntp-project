@@ -16,6 +16,12 @@ void parse_ntp_packet(struct ntp_packet *packet) {
     uint8_t vn = (packet->li_vn_mode >> 3) & 0x07;  // Version Number
     uint8_t mode = packet->li_vn_mode & 0x07;       // Mode
 
+    // Verificação do modo
+    if (mode != 4) {
+        fprintf(stderr, "Modo inválido na resposta: %u (esperado: 4).\n", mode);
+        return;
+    }
+    
     printf("Leap Indicator: %u\n", li);
     printf("Version Number: %u\n", vn);
     printf("Mode: %u\n", mode);
@@ -98,7 +104,7 @@ int main(int argc, char const *argv[]) {
     if (response) {
         parse_ntp_packet(response);
     } else {
-        printf("Failed to receive response from server.\n");
+        printf("não foi possível contactar servidor\n");
     }
 
     return 0;

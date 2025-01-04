@@ -5,5 +5,5 @@ clean:
 	rm -f project
 
 run: project
-	./project 129.6.15.28
+	./project 
 

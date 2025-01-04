@@ -57,7 +57,7 @@ void *send_message(const char *peer_ip, int peer_port, void *payload, struct sen
             FD_ZERO(&readfds);
             FD_SET(udp_socket, &readfds);
 
-            printf("\tWaiting for the answer from the server...\n");
+            printf("\tEsperando resposta do servidor...\n");
             ret = select(udp_socket + 1, &readfds, NULL, NULL, &timeout);
 
             if (ret < 0) {
@@ -65,7 +65,7 @@ void *send_message(const char *peer_ip, int peer_port, void *payload, struct sen
                 close_socket(udp_socket);
                 return NULL;
             } else if (ret == 0) {
-                printf("\tThe timeout has expired, and no message was received from the server.\n");
+                printf("\tOtempo expirou e não houve reposta do servidor.\n");
                 try++;
             } else {
                 flags.received_message = true;
