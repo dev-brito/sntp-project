@@ -104,7 +104,7 @@ int main(int argc, char const *argv[]) {
     if (response) {
         parse_ntp_packet(response);
     } else {
-        printf("não foi possível contactar servidor\n");
+        printf("Data/hora: não foi possível contactar servidor\n");
     }
 
     return 0;
