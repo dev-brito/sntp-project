@@ -89,18 +89,20 @@ void parse_ntp_packet(struct ntp_packet *packet) {
 
 // Função principal
 int main(int argc, char const *argv[]) {
-    (void)argc;
-    (void)argv;
+        if (argc < 2) {
+        fprintf(stderr, "Uso: %s <IP = 129.6.15.28>\n", argv[0]);
+        return 1;
+    }
+
+    const char *server_ip = argv[1];
     struct send_message_flags flags = {.wait_for_answer = true, .timeout = 20, .retries = 1};
     struct ntp_packet ntp_packet;
-    
+
     memset(&ntp_packet, 0, sizeof(ntp_packet));
-    ntp_packet.li_vn_mode = 0x1B; // li = 0, vn = 3, mode = 3
+    ntp_packet.li_vn_mode = 0x1B;
 
-    // Enviar mensagem e receber resposta
-    struct ntp_packet *response = (struct ntp_packet *)send_message("129.6.15.28", 123, (void *)&ntp_packet, flags);
+    struct ntp_packet *response = (struct ntp_packet *)send_message(server_ip, 123, (void *)&ntp_packet, flags);
 
-    // Processar resposta
     if (response) {
         parse_ntp_packet(response);
     } else {
