@@ -2,4 +2,3 @@
 project
 *.o
 main.o
-site/
