@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Welcome to MkDocs - My Docs</title>
+        <title>Trabalho 01 - My Docs</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
             
             
                 <li class="active">
-                    <a href=".">Welcome to MkDocs</a>
+                    <a href=".">Trabalho 01</a>
                 </li>
             
             
@@ -67,11 +67,9 @@
     <ul class="nav bs-sidenav">
       
     
-        <li class="main active"><a href="#welcome-to-mkdocs">Welcome to MkDocs</a></li>
+        <li class="main active"><a href="#trabalho-01">Trabalho 01</a></li>
         
-            <li><a href="#commands">Commands</a></li>
-        
-            <li><a href="#project-layout">Project layout</a></li>
+            <li><a href="#componentes">Componentes</a></li>
         
     
     
@@ -79,21 +77,100 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="trabalho-01">Trabalho 01</h1>
+<blockquote>
+<p>Integrantes do Grupo: </p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li>Guilherme Brito Vilas Boas (180108011)</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+</blockquote>
+<p>Este trabalho consiste na criação de um Cliente para o protocolo SNTP. </p>
+<p>O protocolo SNTP é um protocolo derivado do protocolo NTP (especificado na RFC-1305) e ambos são usados para manter os relógios de dispositivos sincronizados.</p>
+<h2 id="componentes">Componentes</h2>
+<p>Para a concepção desse trabalho, foi necessário implementar componentes adicionais, como por exemplo: </p>
+<h3 id="cliente-udp">Cliente UDP</h3>
+<p>Para o cliente UDP, foi criado uma função principal chamada <code>send_message</code>.
+A função <code>send_message</code> é responsável por criar e enviar uma mensagem via protocolo UDP para o servidor especificado, além de gerenciar a espera pela resposta. Ela pode ser configurada com diferentes parâmetros para ajustar o comportamento do envio e da espera pela resposta, como número de tentativas e tempo de espera.</p>
+<pre><code class="language-c">void *send_message(const char *peer_ip, int peer_port, void *payload, struct send_message_flags flags);
+</code></pre>
+<p>Essa função recebe por parâmetro o ip e porta de envio do pacote UDP (<strong>peer_ip</strong> e <strong>peer_port</strong>), o pacote que será enviado (<strong>payload</strong>) e um parâmetro adicional de algumas flags possíveis para configuração do envio da mensagem:</p>
+<pre><code class="language-c">struct send_message_flags {
+    int retries; # Define o número de tentativas que o cliente deve realizar caso o envio da mensagem ou o recebimento da resposta falhe. O valor padrão é 2, conforme especificado no relatório do Trabalho.
+    bool wait_for_answer; # Indica se o cliente deve aguardar uma resposta após enviar o pacote UDP. Para o cenário deste trabalho, este valor deve ser configurado como true, uma vez que o cliente espera receber uma resposta contendo informações sobre o tempo.
+    int timeout; # Define o tempo máximo (em segundos) que o cliente deve aguardar pela resposta do servidor antes de abortar a operação. O valor padrão é configurado para 20 segundos, conforme especificado no relatório do Trabalho.
+};
+</code></pre>
+<h4 id="retorno">Retorno:</h4>
+<p>A função retorna um ponteiro void*, que pode ser utilizado para acessar a resposta do servidor (se wait_for_answer for true). Caso não haja resposta ou o tempo de espera seja excedido, a função pode retornar NULL ou um valor indicativo de falha, dependendo da implementação interna.</p>
+<h5 id="logica-de-funcionamento">Lógica de Funcionamento</h5>
+<h3 id="1-criacao-do-socket-udp">1. <strong>Criação do Socket UDP</strong></h3>
+<ul>
+<li>A função inicia criando um socket UDP com a chamada à função <code>socket()</code>. </li>
+<li>Se a criação do socket falhar, uma mensagem de erro é exibida, e a função retorna <code>NULL</code>.</li>
+</ul>
+<pre><code class="language-c">int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
+if (udp_socket &lt; 0) {
+    perror(&quot;Socket creation failure.&quot;);
+    return NULL;
+}
+</code></pre>
+<h3 id="2-configuracao-do-endereco-de-destino">2. <strong>Configuração do Endereço de Destino</strong></h3>
+<ul>
+<li>O endereço IP e a porta do servidor de destino são configurados na estrutura <code>sockaddr_in</code>.</li>
+<li>O IP é convertido de formato string para binário usando a função <code>inet_aton()</code>.</li>
+<li>A porta de destino é configurada com a função <code>htons()</code> para garantir que o valor seja interpretado corretamente pelo protocolo de rede.</li>
+<li>Caso o IP fornecido seja inválido, a função exibe uma mensagem de erro e retorna <code>NULL</code>.</li>
+</ul>
+<pre><code class="language-c">struct sockaddr_in peer_addr = {.sin_family = AF_INET, .sin_port = htons(peer_port)};
+
+if (inet_aton(peer_ip, &amp;peer_addr.sin_addr) &lt;= 0) {
+    perror(&quot;Invalid IP address.&quot;);
+    return NULL;
+}
+
+int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
+</code></pre>
+<h3 id="3-envio-da-mensagem">3. <strong>Envio da Mensagem</strong></h3>
+<ul>
+<li>O código tenta enviar o pacote de dados (payload) para o servidor utilizando a função <code>sendto()</code>.</li>
+<li>O número de tentativas de envio é controlado pelo parâmetro <code>retries</code> da estrutura <code>flags</code>.</li>
+<li>Caso o envio falhe, o socket é fechado e a função retorna <code>NULL</code>.</li>
+</ul>
+<h3 id="4-aguarda-resposta">4. <strong>Aguarda Resposta</strong></h3>
+<ul>
+<li>Se a flag <code>wait_for_answer</code> for configurada como <code>true</code>, a função aguarda a resposta do servidor.</li>
+<li>A função utiliza a chamada <code>select()</code> para aguardar por uma resposta dentro do período de tempo configurado em <code>timeout</code>.</li>
+<li>A função verifica se o servidor respondeu dentro do tempo limite.</li>
+<li>Caso o tempo expire sem resposta, o código tenta reenviar a mensagem até atingir o número máximo de tentativas configurado.</li>
+<li>Se <code>select()</code> retornar um erro, o socket é fechado e a função retorna <code>NULL</code>.</li>
+</ul>
+<h3 id="5-recebimento-da-resposta">5. <strong>Recebimento da Resposta</strong></h3>
+<ul>
+<li>Quando uma resposta do servidor é recebida, o código a processa com a função <code>recvfrom()</code>.</li>
+<li>O tamanho dos dados recebidos é comparado com o tamanho esperado de um pacote SNTP.</li>
+<li>Se a quantidade de dados recebidos for menor do que o esperado, um erro é gerado e o socket é fechado.</li>
+</ul>
+<h3 id="6-fechamento-do-socket">6. <strong>Fechamento do Socket</strong></h3>
+<ul>
+<li>Após o envio ou recebimento da mensagem, o socket é fechado com a função <code>close_socket()</code>.</li>
+<li>A função <code>close_socket()</code> garante que o socket seja fechado corretamente, liberando os recursos do sistema.</li>
+</ul>
+<hr />
+<h3 id="comportamento-em-caso-de-falha">Comportamento em Caso de Falha:</h3>
+<ul>
+<li><strong>Erro no Envio</strong>: Se a função <code>sendto()</code> falhar, o socket é fechado e a função retorna <code>NULL</code>.</li>
+<li><strong>Sem Resposta</strong>: Se a resposta não for recebida dentro do tempo limite, o código tenta reenviar a mensagem até o número máximo de tentativas.</li>
+<li><strong>Erro ao Receber</strong>: Se houver erro ao receber a resposta ou se os dados recebidos não forem completos, o socket é fechado e a função retorna <code>NULL</code>.</li>
+</ul>
+<hr />
+<h3 id="mensagens-de-log">Mensagens de Log</h3>
+<ul>
+<li><strong><code>Sending Message</code></strong>: Indica que a mensagem está sendo enviada para o servidor.</li>
+<li><strong><code>Esperando resposta do servidor...</code></strong>: Informa que o cliente está aguardando a resposta do servidor.</li>
+<li><strong><code>O tempo expirou e não houve resposta do servidor.</code></strong>: Aparece caso o servidor não envie uma resposta dentro do tempo limite.</li>
+<li><strong><code>Erro durante o select.</code></strong>: Aparece se ocorrer um erro na função <code>select()</code> ao aguardar pela resposta.</li>
+<li><strong><code>Erro ao receber a mensagem.</code></strong>: Aparece se houver erro ao receber a resposta do servidor.</li>
+</ul></div>
                 </div>
         </div>
 
