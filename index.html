@@ -84,16 +84,16 @@
 <li>Guilherme Brito Vilas Boas (180108011)</li>
 </ul>
 </blockquote>
-<p>Este trabalho consiste na criação de um Cliente para o protocolo SNTP. </p>
-<p>O protocolo SNTP é um protocolo derivado do protocolo NTP (especificado na RFC-1305) e ambos são usados para manter os relógios de dispositivos sincronizados.</p>
+<p>Este trabalho tem como objetivo a criação de um cliente para o protocolo SNTP.</p>
+<p>O SNTP (Simple Network Time Protocol) é um protocolo derivado do NTP (Network Time Protocol), especificado pela RFC-1305. Ambos os protocolos são utilizados para manter os relógios dos dispositivos sincronizados.</p>
 <h2 id="componentes">Componentes</h2>
-<p>Para a concepção desse trabalho, foi necessário implementar componentes adicionais, como por exemplo: </p>
+<p>Para a realização deste trabalho, foi necessário desenvolver componentes adicionais, como, por exemplo:</p>
 <h3 id="cliente-udp">Cliente UDP</h3>
-<p>Para o cliente UDP, foi criado uma função principal chamada <code>send_message</code>.
-A função <code>send_message</code> é responsável por criar e enviar uma mensagem via protocolo UDP para o servidor especificado, além de gerenciar a espera pela resposta. Ela pode ser configurada com diferentes parâmetros para ajustar o comportamento do envio e da espera pela resposta, como número de tentativas e tempo de espera.</p>
+<p>Neste tópico, será apresentada a descrição da pequena biblioteca genérica desenvolvida pelo grupo para enviar mensagens via protocolo UDP para um servidor. </p>
+<p>A função <strong>principal</strong> send_message é responsável por enviar uma mensagem via protocolo UDP para o servidor especificado, além de gerenciar a espera pela resposta. Ela pode ser configurada com diferentes parâmetros para ajustar o comportamento do envio e da espera pela resposta, como número de tentativas e tempo de espera.</p>
 <pre><code class="language-c">void *send_message(const char *peer_ip, int peer_port, void *payload, struct send_message_flags flags);
 </code></pre>
-<p>Essa função recebe por parâmetro o ip e porta de envio do pacote UDP (<strong>peer_ip</strong> e <strong>peer_port</strong>), o pacote que será enviado (<strong>payload</strong>) e um parâmetro adicional de algumas flags possíveis para configuração do envio da mensagem:</p>
+<p>Essa função recebe por parâmetro o ip e porta de envio do pacote UDP (<strong>peer_ip</strong> e <strong>peer_port</strong>), o pacote que será enviado (<strong>payload</strong>) e um parâmetro adicional de algumas flags possíveis para configuração do comportamento da função:</p>
 <pre><code class="language-c">struct send_message_flags {
     int retries; # Define o número de tentativas que o cliente deve realizar caso o envio da mensagem ou o recebimento da resposta falhe. O valor padrão é 2, conforme especificado no relatório do Trabalho.
     bool wait_for_answer; # Indica se o cliente deve aguardar uma resposta após enviar o pacote UDP. Para o cenário deste trabalho, este valor deve ser configurado como true, uma vez que o cliente espera receber uma resposta contendo informações sobre o tempo.
