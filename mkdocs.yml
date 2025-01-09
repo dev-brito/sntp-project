@@ -1,4 +1,7 @@
-site_name: My Docs
+site_name: TP1 [Fundamentos de Redes de Computadores]
 
 theme:
-  name: bootstrap386
+  name: terminal
+  palette: dark
+
+repo_url: https://github.com/dev-brito/sntp-project
