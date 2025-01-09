@@ -1,124 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.7.0">
+     
+     
+    <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Home - TP1 [Fundamentos de Redes de Computadores]</title>
+
+
+<link href="css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="css/normalize.css" rel="stylesheet">
+<link href="css/terminal.css" rel="stylesheet">
+<link href="css/theme.css" rel="stylesheet">
+<link href="css/theme.tile_grid.css" rel="stylesheet">
+<link href="css/theme.footer.css" rel="stylesheet">
+<!-- dark color palette -->
+<link href="css/palettes/dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+     
+    
+    
+
+    
+    <!-- search css support -->
+<link href="css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = ".",
+    shortcuts = "{}";
+</script>
+<script src="js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="js/bootstrap/bootstrap.min.js" defer></script>
+<script src="js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="/" class="no-style">TP1 [Fundamentos de Redes de Computadores]</a></div>
+        </header>
         
-        
-        
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Trabalho 01 - My Docs</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href=".">My Docs</a>
-        </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-            <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+        <nav class="terminal-menu">
             
-            
-                <li class="active">
-                    <a href=".">Trabalho 01</a>
-                </li>
-            
-            
-            </ul>
-
-            <!-- Search, Navigation and Repo links -->
-            <ul class="nav navbar-nav navbar-right">
-                
-            </ul>
-        </div>
+        </nav>
     </div>
 </div>
-
-        <div class="container">
-                <div class="row">
-                    <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-      
-    
-        <li class="main active"><a href="#trabalho-01">Trabalho 01</a></li>
         
-            <li><a href="#componentes">Componentes</a></li>
-        
-    
-    
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+  
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#build">Build</a></li>
+        <li><a href="#execucao-do-programa">Execução do Programa</a></li>
+        <li><a href="#introducao">Introdução</a></li>
+        <li><a href="#componentes">Componentes</a></li><li><a href="#cliente-basico-udp">Cliente Básico UDP</a></li>
     </ul>
-</div></div>
-                    <div class="col-md-9" role="main">
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <style>body {text-align: justify}</style>
 
-<h1 id="trabalho-01">Trabalho 01</h1>
 <blockquote>
 <p>Integrantes do Grupo: </p>
-<ul>
-<li>Guilherme Brito Vilas Boas (180108011)</li>
-</ul>
+<p>Guilherme Brito Vilas Boas (190108011)</p>
+<p>Sistema Utilizado: Linux Ubuntu 22.04
+Ambiente de Desenvolvimento: Visual Studio Code</p>
 </blockquote>
+<h1 id="build">Build</h1>
+<p>Para a build desse projeto, é necessário rodar o comando <code>make project</code> para que o arquivo executável seja gerado.</p>
+<hr />
+<h1 id="execucao-do-programa">Execução do Programa</h1>
+<p>Para a execução do programa, basta após a <strong>build</strong>, executar o comando <code>./project &lt;IP SERVIDOR SNTP&gt;</code>.</p>
+<blockquote>
+<p>exemplo: <code>./project 129.6.15.28</code></p>
+<p><img alt="exemplo de execução" src="example.png" /></p>
+</blockquote>
+<hr />
+<h1 id="introducao">Introdução</h1>
 <p>Este trabalho tem como objetivo a criação de um cliente para o protocolo SNTP.</p>
-<p>O SNTP (Simple Network Time Protocol) é um protocolo derivado do NTP (Network Time Protocol), especificado pela RFC-1305. Ambos os protocolos são utilizados para manter os relógios dos dispositivos sincronizados.</p>
+<p>O SNTP (Simple Network Time Protocol) é um protocolo derivado do NTP (Network Time Protocol), especificado pela <a href="https://www.ntp.org/reflib/rfc/rfc1305/rfc1305b.pdf">RFC-1305</a>. Ambos os protocolos são utilizados para manter os relógios dos dispositivos sincronizados.</p>
 <h2 id="componentes">Componentes</h2>
-<p>Para a realização deste trabalho, foi necessário desenvolver componentes adicionais, como, por exemplo:</p>
-<h3 id="cliente-udp">Cliente UDP</h3>
-<p>Neste tópico, será apresentada a descrição da pequena biblioteca genérica desenvolvida pelo grupo para enviar mensagens via protocolo UDP para um servidor. </p>
+<p>Para a realização deste trabalho, foi necessário o desenvolvimento de componentes adicionais, como, por exemplo um <code>Cliente Genérico UDP</code>.</p>
+<h2 id="cliente-basico-udp">Cliente Básico UDP</h2>
+<p>Neste tópico, será apresentada a descrição da pequena biblioteca de um cliente UDP genérico desenvolvida pelo grupo para enviar mensagens via protocolo UDP para um servidor. </p>
 <p>A função <strong>principal</strong> send_message é responsável por enviar uma mensagem via protocolo UDP para o servidor especificado, além de gerenciar a espera pela resposta. Ela pode ser configurada com diferentes parâmetros para ajustar o comportamento do envio e da espera pela resposta, como número de tentativas e tempo de espera.</p>
 <pre><code class="language-c">void *send_message(const char *peer_ip, int peer_port, void *payload, struct send_message_flags flags);
 </code></pre>
 <p>Essa função recebe por parâmetro o ip e porta de envio do pacote UDP (<strong>peer_ip</strong> e <strong>peer_port</strong>), o pacote que será enviado (<strong>payload</strong>) e um parâmetro adicional de algumas flags possíveis para configuração do comportamento da função:</p>
 <pre><code class="language-c">struct send_message_flags {
-    int retries; # Define o número de tentativas que o cliente deve realizar caso o envio da mensagem ou o recebimento da resposta falhe. O valor padrão é 2, conforme especificado no relatório do Trabalho.
-    bool wait_for_answer; # Indica se o cliente deve aguardar uma resposta após enviar o pacote UDP. Para o cenário deste trabalho, este valor deve ser configurado como true, uma vez que o cliente espera receber uma resposta contendo informações sobre o tempo.
+    int retries; # Define o número de tentativas que o cliente deve realizar caso o envio da mensagem ou o recebimento da resposta falhe. O valor padrão é 2 (1 + 1 tentativa), conforme especificado no relatório do Trabalho.
+    bool wait_for_answer; # Indica se o cliente deve aguardar uma resposta após enviar o pacote UDP. Para o cenário deste trabalho, este valor deve ser configurado como true, uma vez que o cliente SNTP espera receber uma resposta do servidor contendo informações sobre o tempo.
     int timeout; # Define o tempo máximo (em segundos) que o cliente deve aguardar pela resposta do servidor antes de abortar a operação. O valor padrão é configurado para 20 segundos, conforme especificado no relatório do Trabalho.
 };
 </code></pre>
-<h4 id="retorno">Retorno:</h4>
-<p>A função retorna um ponteiro void*, que pode ser utilizado para acessar a resposta do servidor (se wait_for_answer for true). Caso não haja resposta ou o tempo de espera seja excedido, a função pode retornar NULL ou um valor indicativo de falha, dependendo da implementação interna.</p>
-<h5 id="logica-de-funcionamento">Lógica de Funcionamento</h5>
-<h3 id="1-criacao-do-socket-udp">1. <strong>Criação do Socket UDP</strong></h3>
+<hr />
+<h4 id="retorno">Retorno</h4>
+<p>A função retorna um ponteiro void*, que pode ser utilizado para acessar a resposta do servidor (se <code>wait_for_answer</code> for true). Caso não haja resposta ou o tempo de espera seja excedido, a função pode retornar NULL ou um valor indicativo de falha, dependendo da implementação interna.</p>
+<hr />
+<h4 id="logica-de-funcionamento">Lógica de Funcionamento</h4>
+<h3 id="1-configuracao-do-endereco-de-destino">1. <strong>Configuração do Endereço de Destino</strong></h3>
 <ul>
-<li>A função inicia criando um socket UDP com a chamada à função <code>socket()</code>. </li>
-<li>Se a criação do socket falhar, uma mensagem de erro é exibida, e a função retorna <code>NULL</code>.</li>
-</ul>
-<pre><code class="language-c">int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
-if (udp_socket &lt; 0) {
-    perror(&quot;Socket creation failure.&quot;);
-    return NULL;
-}
-</code></pre>
-<h3 id="2-configuracao-do-endereco-de-destino">2. <strong>Configuração do Endereço de Destino</strong></h3>
-<ul>
-<li>O endereço IP e a porta do servidor de destino são configurados na estrutura <code>sockaddr_in</code>.</li>
-<li>O IP é convertido de formato string para binário usando a função <code>inet_aton()</code>.</li>
-<li>A porta de destino é configurada com a função <code>htons()</code> para garantir que o valor seja interpretado corretamente pelo protocolo de rede.</li>
+<li>O endereço IP e a porta do servidor de destino são configurados na estrutura <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html"><code>sockaddr_in</code></a>.</li>
+<li>O IP é convertido de formato string para binário usando a função <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/inet_ntoaman.html"><code>inet_aton()</code></a>.</li>
+<li>A porta de destino é configurada com a função <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/htonsman.html"><code>htons()</code></a> para garantir que o valor seja interpretado corretamente pelo protocolo de rede.</li>
 <li>Caso o IP fornecido seja inválido, a função exibe uma mensagem de erro e retorna <code>NULL</code>.</li>
 </ul>
 <pre><code class="language-c">struct sockaddr_in peer_addr = {.sin_family = AF_INET, .sin_port = htons(peer_port)};
@@ -130,55 +162,159 @@ if (inet_aton(peer_ip, &amp;peer_addr.sin_addr) &lt;= 0) {
 
 int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
 </code></pre>
+<h3 id="2-criacao-do-socket-udp">2. <strong>Criação do Socket UDP</strong></h3>
+<ul>
+<li>A função segue tentando criar um socket UDP com a chamada à função <a href="https://man7.org/linux/man-pages/man2/socket.2.html"><code>socket()</code></a>. </li>
+<li>Se a criação do socket falhar, uma mensagem de erro é exibida, e a função retorna <code>NULL</code>.</li>
+</ul>
+<pre><code class="language-c">int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
+if (udp_socket &lt; 0) {
+    perror(&quot;Socket creation failure.&quot;);
+    return NULL;
+}
+</code></pre>
 <h3 id="3-envio-da-mensagem">3. <strong>Envio da Mensagem</strong></h3>
 <ul>
-<li>O código tenta enviar o pacote de dados (payload) para o servidor utilizando a função <code>sendto()</code>.</li>
-<li>O número de tentativas de envio é controlado pelo parâmetro <code>retries</code> da estrutura <code>flags</code>.</li>
+<li>O código tenta enviar o pacote de dados (payload) para o servidor utilizando a função <a href="https://pubs.opengroup.org/onlinepubs/009604499/functions/sendto.html"><code>sendto()</code></a>.</li>
 <li>Caso o envio falhe, o socket é fechado e a função retorna <code>NULL</code>.</li>
 </ul>
+<pre><code class="language-c">  if (sendto(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, sizeof(peer_addr)) &lt; 0) {
+            perror(&quot;Sending message failure.&quot;);
+            close_socket(udp_socket);
+            return NULL;
+        }
+</code></pre>
 <h3 id="4-aguarda-resposta">4. <strong>Aguarda Resposta</strong></h3>
 <ul>
 <li>Se a flag <code>wait_for_answer</code> for configurada como <code>true</code>, a função aguarda a resposta do servidor.</li>
-<li>A função utiliza a chamada <code>select()</code> para aguardar por uma resposta dentro do período de tempo configurado em <code>timeout</code>.</li>
+<li>A função utiliza a chamada <a href="https://man7.org/linux/man-pages/man2/select.2.html"><code>select()</code></a> para aguardar por uma resposta dentro do período de tempo configurado na flag <code>timeout</code>.</li>
 <li>A função verifica se o servidor respondeu dentro do tempo limite.</li>
 <li>Caso o tempo expire sem resposta, o código tenta reenviar a mensagem até atingir o número máximo de tentativas configurado.</li>
 <li>Se <code>select()</code> retornar um erro, o socket é fechado e a função retorna <code>NULL</code>.</li>
 </ul>
+<pre><code class="language-c">int try = 1;
+    int total_tries = flags.retries + 1;
+    do {
+        flags.received_message = false;
+        printf(&quot;Sending Message\n\tTry: %d\n\tTotal tries:%d.\n&quot;, try, total_tries);
+
+        if (sendto(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, sizeof(peer_addr)) &lt; 0) {
+            perror(&quot;Sending message failure.&quot;);
+            close_socket(udp_socket);
+            return NULL;
+        }
+
+        if (flags.wait_for_answer) {
+            int ret;
+            fd_set readfds;
+            struct timeval timeout;
+            timeout.tv_sec = flags.timeout;
+            timeout.tv_usec = 0;
+
+            FD_ZERO(&amp;readfds);
+            FD_SET(udp_socket, &amp;readfds);
+
+            printf(&quot;\tEsperando resposta do servidor...\n&quot;);
+            ret = select(udp_socket + 1, &amp;readfds, NULL, NULL, &amp;timeout);
+
+            if (ret &lt; 0) {
+                perror(&quot;Error during select.&quot;);
+                close_socket(udp_socket);
+                return NULL;
+            } else if (ret == 0) {
+                printf(&quot;\tOtempo expirou e não houve reposta do servidor.\n&quot;);
+                try++;
+            } else {
+                flags.received_message = true;
+            }
+        }
+    } while (try &lt;= total_tries &amp;&amp; !flags.received_message);
+</code></pre>
 <h3 id="5-recebimento-da-resposta">5. <strong>Recebimento da Resposta</strong></h3>
 <ul>
-<li>Quando uma resposta do servidor é recebida, o código a processa com a função <code>recvfrom()</code>.</li>
+<li>Quando uma resposta do servidor é recebida, o código a processa com a função <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/recvman.html"><code>recvfrom()</code></a>.</li>
 <li>O tamanho dos dados recebidos é comparado com o tamanho esperado de um pacote SNTP.</li>
 <li>Se a quantidade de dados recebidos for menor do que o esperado, um erro é gerado e o socket é fechado.</li>
 </ul>
+<pre><code class="language-c"> if (flags.received_message) {
+        socklen_t addr_len = sizeof(peer_addr);
+        ssize_t received_bytes = recvfrom(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, &amp;addr_len);
+
+      if (received_bytes &lt; 0) {
+          perror(&quot;Error receiving message.&quot;);
+          close_socket(udp_socket);
+          return NULL;
+      } else if (received_bytes &lt; (ssize_t)sizeof(struct ntp_packet)) {
+          fprintf(stderr, &quot;Incomplete SNTP packet received (%zd bytes).\n&quot;, received_bytes);
+          close_socket(udp_socket);
+          return NULL;
+      }
+  }
+</code></pre>
 <h3 id="6-fechamento-do-socket">6. <strong>Fechamento do Socket</strong></h3>
 <ul>
 <li>Após o envio ou recebimento da mensagem, o socket é fechado com a função <code>close_socket()</code>.</li>
-<li>A função <code>close_socket()</code> garante que o socket seja fechado corretamente, liberando os recursos do sistema.</li>
+<li>A função <a href="https://man7.org/linux/man-pages/man2/close.2.html"><code>close_socket()</code></a> garante que o socket seja fechado corretamente, liberando os recursos do sistema.</li>
 </ul>
-<hr />
-<h3 id="comportamento-em-caso-de-falha">Comportamento em Caso de Falha:</h3>
-<ul>
-<li><strong>Erro no Envio</strong>: Se a função <code>sendto()</code> falhar, o socket é fechado e a função retorna <code>NULL</code>.</li>
-<li><strong>Sem Resposta</strong>: Se a resposta não for recebida dentro do tempo limite, o código tenta reenviar a mensagem até o número máximo de tentativas.</li>
-<li><strong>Erro ao Receber</strong>: Se houver erro ao receber a resposta ou se os dados recebidos não forem completos, o socket é fechado e a função retorna <code>NULL</code>.</li>
-</ul>
-<hr />
-<h3 id="mensagens-de-log">Mensagens de Log</h3>
-<ul>
-<li><strong><code>Sending Message</code></strong>: Indica que a mensagem está sendo enviada para o servidor.</li>
-<li><strong><code>Esperando resposta do servidor...</code></strong>: Informa que o cliente está aguardando a resposta do servidor.</li>
-<li><strong><code>O tempo expirou e não houve resposta do servidor.</code></strong>: Aparece caso o servidor não envie uma resposta dentro do tempo limite.</li>
-<li><strong><code>Erro durante o select.</code></strong>: Aparece se ocorrer um erro na função <code>select()</code> ao aguardar pela resposta.</li>
-<li><strong><code>Erro ao receber a mensagem.</code></strong>: Aparece se houver erro ao receber a resposta do servidor.</li>
-</ul></div>
-                </div>
-        </div>
+<pre><code class="language-c">int close_socket(int socket)
+{
+    if (close(socket) &lt; 0)
+    {
+        perror(&quot;Error closing socket.&quot;);
+        return EXIT_FAILURE;
+    }
 
-    <hr>
-    <footer class="container">
-        
-        <center>Documentation built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="http://kristopolous.github.io/BOOTSTRA.386">BOOTSTRA.386</a>.</center>
-    </footer>
-        <script src="search/main.js"></script>
-    </body>
+    return EXIT_SUCCESS;
+}
+</code></pre>
+<hr />
+<h3 id="exemplo-de-uso">Exemplo de Uso</h3>
+<pre><code class="language-c">struct send_message_flags flags = {.wait_for_answer = true, .timeout = 20, .retries = 1};
+struct ntp_packet ntp_packet;
+
+memset(&amp;ntp_packet, 0, sizeof(ntp_packet));
+ntp_packet.li_vn_mode = 0x1B;
+
+struct ntp_packet *response = (struct ntp_packet *)send_message(server_ip, 123, (void *)&amp;ntp_packet, flags);
+
+</code></pre>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
 </html>
