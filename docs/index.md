@@ -3,7 +3,7 @@
 > Integrantes do Grupo:
 >
 > - Guilherme Brito Vilas Boas (180108011)
-  - Daniel Rocha Oliveira (190104821)
+> - Daniel Rocha Oliveira (190104821)
 
 Este trabalho consiste na criação de um Cliente para o protocolo SNTP.
 
