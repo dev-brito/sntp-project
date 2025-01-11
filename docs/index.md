@@ -1,9 +1,14 @@
 # Trabalho 01
 
 > Integrantes do Grupo:
->
+
+> - Silas Neres de Souza (200043536)
 > - Guilherme Brito Vilas Boas (180108011)
 > - Daniel Rocha Oliveira (190104821)
+
+O trabalho foi construído na linguagem C
+
+para rodar o projeto utilize o make run
 
 Este trabalho consiste na criação de um Cliente para o protocolo SNTP.
 
@@ -82,8 +87,24 @@ uint32_t server_time = ntohl(response->txTm_s); // Converte para a ordem de byte
 server_time -= 2208988800U; // Ajusta para o Epoch UNIX (1970)
 printf("Horário recebido do servidor: %u\n", server_time);
 ```
+#### 4.**Conversão de Data e Hora em Português**
 
-#### 4. **Tratamento de Erros**
+- Foi feita uma tradução da data e hora para o português, através do código a seguir que converte a "data/hora" do formato struct tm para uma string com nomes de dias da semana e meses traduzidos para português.
+
+```c
+struct tm *tm_info = localtime(&tx_time);
+const char *dias_da_semana_pt[] = {"Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"};
+const char *meses_pt[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
+char dia_semana[4];
+strftime(dia_semana, sizeof(dia_semana), "%a", tm_info);
+for (int i = 0; i < 7; i++) {
+    if (strcmp(dia_semana, "Sun") == 0) strcpy(dia_semana, dias_da_semana_pt[0]);
+    // Outras comparações semelhantes...
+}
+```
+
+#### 5. **Tratamento de Erros**
 - Em caso de erro no parseamento ou validação:
   - Uma mensagem de erro é registrada no log.
   - O socket é fechado e a função retorna `NULL`.

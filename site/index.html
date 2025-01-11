@@ -81,10 +81,13 @@
 <blockquote>
 <p>Integrantes do Grupo:</p>
 <ul>
+<li>Silas Neres de Souza (200043536)</li>
 <li>Guilherme Brito Vilas Boas (180108011)</li>
 <li>Daniel Rocha Oliveira (190104821)</li>
 </ul>
 </blockquote>
+<p>O trabalho foi construído na linguagem C</p>
+<p>para rodar o projeto utilize o make run</p>
 <p>Este trabalho consiste na criação de um Cliente para o protocolo SNTP.</p>
 <p>O protocolo SNTP é um protocolo derivado do protocolo NTP (especificado na RFC-1305) e ambos são usados para manter os relógios de dispositivos sincronizados.</p>
 <h2 id="componentes">Componentes</h2>
@@ -147,7 +150,22 @@ if ((response-&gt;li_vn_mode &amp; 0x07) != 4) { // Verifica se o modo é Server
 server_time -= 2208988800U; // Ajusta para o Epoch UNIX (1970)
 printf(&quot;Horário recebido do servidor: %u\n&quot;, server_time);
 </code></pre>
-<h4 id="4-tratamento-de-erros">4. <strong>Tratamento de Erros</strong></h4>
+<h4 id="4conversao-de-data-e-hora-em-portugues">4.<strong>Conversão de Data e Hora em Português</strong></h4>
+<ul>
+<li>Foi feita uma tradução da data e hora para o português, através do código a seguir que converte a "data/hora" do formato struct tm para uma string com nomes de dias da semana e meses traduzidos para português.</li>
+</ul>
+<pre><code class="language-c">struct tm *tm_info = localtime(&amp;tx_time);
+const char *dias_da_semana_pt[] = {&quot;Dom&quot;, &quot;Seg&quot;, &quot;Ter&quot;, &quot;Qua&quot;, &quot;Qui&quot;, &quot;Sex&quot;, &quot;Sáb&quot;};
+const char *meses_pt[] = {&quot;Jan&quot;, &quot;Fev&quot;, &quot;Mar&quot;, &quot;Abr&quot;, &quot;Mai&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Ago&quot;, &quot;Set&quot;, &quot;Out&quot;, &quot;Nov&quot;, &quot;Dez&quot;};
+
+char dia_semana[4];
+strftime(dia_semana, sizeof(dia_semana), &quot;%a&quot;, tm_info);
+for (int i = 0; i &lt; 7; i++) {
+    if (strcmp(dia_semana, &quot;Sun&quot;) == 0) strcpy(dia_semana, dias_da_semana_pt[0]);
+    // Outras comparações semelhantes...
+}
+</code></pre>
+<h4 id="5-tratamento-de-erros">5. <strong>Tratamento de Erros</strong></h4>
 <ul>
 <li>Em caso de erro no parseamento ou validação:</li>
 <li>Uma mensagem de erro é registrada no log.</li>
