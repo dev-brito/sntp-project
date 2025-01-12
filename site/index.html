@@ -136,14 +136,14 @@
 <h3 id="cliente-udp">Cliente UDP</h3>
 <p>Neste tópico, será apresentada a descrição da pequena biblioteca de um cliente UDP genérico desenvolvida pelo grupo para enviar mensagens via protocolo UDP para um servidor. </p>
 <p>A função <strong>principal</strong> send_message é responsável por enviar uma mensagem via protocolo UDP para o servidor especificado, além de gerenciar a espera pela resposta. Ela pode ser configurada com diferentes parâmetros para ajustar o comportamento do envio e da espera pela resposta, como número de tentativas e tempo de espera.</p>
-<pre><code class="language-c">void *send_message(const char *peer_ip, int peer_port, void *payload, struct send_message_flags flags);
-</code></pre>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">void</span><span style="color: #BBB"> </span><span style="color: #666">*</span><span style="color: #00F">send_message</span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #BBB"> </span><span style="color: #B00040">char</span><span style="color: #BBB"> </span><span style="color: #666">*</span>peer_ip,<span style="color: #BBB"> </span><span style="color: #B00040">int</span><span style="color: #BBB"> </span>peer_port,<span style="color: #BBB"> </span><span style="color: #B00040">void</span><span style="color: #BBB"> </span><span style="color: #666">*</span>payload,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">send_message_flags</span><span style="color: #BBB"> </span>flags);
+</code></pre></div>
 <p>Essa função recebe por parâmetro o ip e porta de envio do pacote UDP (<strong>peer_ip</strong> e <strong>peer_port</strong>), o pacote que será enviado (<strong>payload</strong>) e um parâmetro adicional de algumas flags possíveis para configuração do comportamento da função:</p>
-<pre><code class="language-c">struct send_message_flags {
-    int retries; # Define o número de tentativas que o cliente deve realizar caso o envio da mensagem ou o recebimento da resposta falhe. O valor padrão é 2 (1 + 1 tentativa), conforme especificado no relatório do Trabalho.
-    bool wait_for_answer; # Indica se o cliente deve aguardar uma resposta após enviar o pacote UDP. Para o cenário deste trabalho, este valor deve ser configurado como true, uma vez que o cliente SNTP espera receber uma resposta do servidor contendo informações sobre o tempo.
-    int timeout; # Define o tempo máximo (em segundos) que o cliente deve aguardar pela resposta do servidor antes de abortar a operação. O valor padrão é configurado para 20 segundos, conforme especificado no relatório do Trabalho.
-</code></pre>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">send_message_flags</span><span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span><span style="color: #B00040">int</span><span style="color: #BBB"> </span>retries;<span style="color: #BBB"> </span><span style="border: 1px solid #F00">#</span><span style="color: #BBB"> </span>Define<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>número<span style="color: #BBB"> </span>de<span style="color: #BBB"> </span>tentativas<span style="color: #BBB"> </span>que<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>cliente<span style="color: #BBB"> </span>deve<span style="color: #BBB"> </span>realizar<span style="color: #BBB"> </span>caso<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>envio<span style="color: #BBB"> </span>da<span style="color: #BBB"> </span>mensagem<span style="color: #BBB"> </span>ou<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>recebimento<span style="color: #BBB"> </span>da<span style="color: #BBB"> </span>resposta<span style="color: #BBB"> </span>falhe.<span style="color: #BBB"> </span>O<span style="color: #BBB"> </span>valor<span style="color: #BBB"> </span>padrão<span style="color: #BBB"> </span>é<span style="color: #BBB"> </span><span style="color: #666">2</span><span style="color: #BBB"> </span>(<span style="color: #666">1</span><span style="color: #BBB"> </span><span style="color: #666">+</span><span style="color: #BBB"> </span><span style="color: #666">1</span><span style="color: #BBB"> </span>tentativa),<span style="color: #BBB"> </span>conforme<span style="color: #BBB"> </span>especificado<span style="color: #BBB"> </span>no<span style="color: #BBB"> </span>relatório<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">do</span><span style="color: #BBB"> </span>Trabalho.
+<span style="color: #BBB">    </span><span style="color: #B00040">bool</span><span style="color: #BBB"> </span>wait_for_answer;<span style="color: #BBB"> </span><span style="border: 1px solid #F00">#</span><span style="color: #BBB"> </span>Indica<span style="color: #BBB"> </span>se<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>cliente<span style="color: #BBB"> </span>deve<span style="color: #BBB"> </span>aguardar<span style="color: #BBB"> </span>uma<span style="color: #BBB"> </span>resposta<span style="color: #BBB"> </span>após<span style="color: #BBB"> </span>enviar<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>pacote<span style="color: #BBB"> </span>UDP.<span style="color: #BBB"> </span>Para<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>cenário<span style="color: #BBB"> </span>deste<span style="color: #BBB"> </span>trabalho,<span style="color: #BBB"> </span>este<span style="color: #BBB"> </span>valor<span style="color: #BBB"> </span>deve<span style="color: #BBB"> </span>ser<span style="color: #BBB"> </span>configurado<span style="color: #BBB"> </span>como<span style="color: #BBB"> </span><span style="color: #008000">true</span>,<span style="color: #BBB"> </span>uma<span style="color: #BBB"> </span>vez<span style="color: #BBB"> </span>que<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>cliente<span style="color: #BBB"> </span>SNTP<span style="color: #BBB"> </span>espera<span style="color: #BBB"> </span>receber<span style="color: #BBB"> </span>uma<span style="color: #BBB"> </span>resposta<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">do</span><span style="color: #BBB"> </span>servidor<span style="color: #BBB"> </span>contendo<span style="color: #BBB"> </span>informações<span style="color: #BBB"> </span>sobre<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>tempo.
+<span style="color: #BBB">    </span><span style="color: #B00040">int</span><span style="color: #BBB"> </span>timeout;<span style="color: #BBB"> </span><span style="border: 1px solid #F00">#</span><span style="color: #BBB"> </span>Define<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>tempo<span style="color: #BBB"> </span>máximo<span style="color: #BBB"> </span>(em<span style="color: #BBB"> </span>segundos)<span style="color: #BBB"> </span>que<span style="color: #BBB"> </span>o<span style="color: #BBB"> </span>cliente<span style="color: #BBB"> </span>deve<span style="color: #BBB"> </span>aguardar<span style="color: #BBB"> </span>pela<span style="color: #BBB"> </span>resposta<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">do</span><span style="color: #BBB"> </span>servidor<span style="color: #BBB"> </span>antes<span style="color: #BBB"> </span>de<span style="color: #BBB"> </span>abortar<span style="color: #BBB"> </span>a<span style="color: #BBB"> </span>operação.<span style="color: #BBB"> </span>O<span style="color: #BBB"> </span>valor<span style="color: #BBB"> </span>padrão<span style="color: #BBB"> </span>é<span style="color: #BBB"> </span>configurado<span style="color: #BBB"> </span>para<span style="color: #BBB"> </span><span style="color: #666">20</span><span style="color: #BBB"> </span>segundos,<span style="color: #BBB"> </span>conforme<span style="color: #BBB"> </span>especificado<span style="color: #BBB"> </span>no<span style="color: #BBB"> </span>relatório<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">do</span><span style="color: #BBB"> </span>Trabalho.
+</code></pre></div>
 <hr />
 <h4 id="retorno">Retorno</h4>
 <p>A função retorna um ponteiro void*, que pode ser utilizado para acessar a resposta do servidor (se <code>wait_for_answer</code> for true). Caso não haja resposta ou o tempo de espera seja excedido, a função retorna NULL.</p>
@@ -156,35 +156,35 @@
 <li>A porta de destino é configurada com a função <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/htonsman.html"><code>htons()</code></a> para garantir que o valor seja interpretado corretamente pelo protocolo de rede.</li>
 <li>Caso o IP fornecido seja inválido, a função exibe uma mensagem de erro e retorna <code>NULL</code>.</li>
 </ul>
-<pre><code class="language-c">struct sockaddr_in peer_addr = {.sin_family = AF_INET, .sin_port = htons(peer_port)};
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">sockaddr_in</span><span style="color: #BBB"> </span>peer_addr<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{.sin_family<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>AF_INET,<span style="color: #BBB"> </span>.sin_port<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>htons(peer_port)};
 
-if (inet_aton(peer_ip, &amp;peer_addr.sin_addr) &lt;= 0) {
-    perror(&quot;Invalid IP address.&quot;);
-    return NULL;
+<span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(inet_aton(peer_ip,<span style="color: #BBB"> </span><span style="color: #666">&amp;</span>peer_addr.sin_addr)<span style="color: #BBB"> </span><span style="color: #666">&lt;=</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span>perror(<span style="color: #BA2121">&quot;Invalid IP address.&quot;</span>);
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
 }
-</code></pre>
+</code></pre></div>
 <h5 id="2-criacao-do-socket-udp">2. <strong>Criação do Socket UDP</strong></h5>
 <ul>
 <li>A função segue tentando criar um socket UDP com a chamada à função <a href="https://man7.org/linux/man-pages/man2/socket.2.html"><code>socket()</code></a>. </li>
 <li>Se a criação do socket falhar, uma mensagem de erro é exibida, e a função retorna <code>NULL</code>.</li>
 </ul>
-<pre><code class="language-c">int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
-if (udp_socket &lt; 0) {
-    perror(&quot;Socket creation failure.&quot;);
-    return NULL;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">int</span><span style="color: #BBB"> </span>udp_socket<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>socket(AF_INET,<span style="color: #BBB"> </span>SOCK_DGRAM,<span style="color: #BBB"> </span><span style="color: #666">0</span>);
+<span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(udp_socket<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span>perror(<span style="color: #BA2121">&quot;Socket creation failure.&quot;</span>);
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
 }
-</code></pre>
+</code></pre></div>
 <h5 id="3-envio-da-mensagem">3. <strong>Envio da Mensagem</strong></h5>
 <ul>
 <li>O código tenta enviar o pacote de dados (payload) para o servidor utilizando a função <a href="https://pubs.opengroup.org/onlinepubs/009604499/functions/sendto.html"><code>sendto()</code></a>.</li>
 <li>Caso o envio falhe, o socket é fechado e a função retorna <code>NULL</code>.</li>
 </ul>
-<pre><code class="language-c">  if (sendto(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, sizeof(peer_addr)) &lt; 0) {
-            perror(&quot;Sending message failure.&quot;);
-            close_socket(udp_socket);
-            return NULL;
-        }
-</code></pre>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #BBB">  </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(sendto(udp_socket,<span style="color: #BBB"> </span>payload,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span>),<span style="color: #BBB"> </span><span style="color: #666">0</span>,<span style="color: #BBB"> </span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">sockaddr</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)<span style="color: #666">&amp;</span>peer_addr,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(peer_addr))<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span>perror(<span style="color: #BA2121">&quot;Sending message failure.&quot;</span>);
+<span style="color: #BBB">            </span>close_socket(udp_socket);
+<span style="color: #BBB">            </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
+<span style="color: #BBB">        </span>}
+</code></pre></div>
 <h5 id="4-aguarda-resposta">4. <strong>Aguarda Resposta</strong></h5>
 <ul>
 <li>Se a flag <code>wait_for_answer</code> for configurada como <code>true</code>, a função aguarda a resposta do servidor.</li>
@@ -193,91 +193,91 @@ if (udp_socket &lt; 0) {
 <li>Caso o tempo expire sem resposta, o código tenta reenviar a mensagem até atingir o número máximo de tentativas configurado.</li>
 <li>Se <code>select()</code> retornar um erro, o socket é fechado e a função retorna <code>NULL</code>.</li>
 </ul>
-<pre><code class="language-c">int try = 1;
-    int total_tries = flags.retries + 1;
-    do {
-        flags.received_message = false;
-        printf(&quot;Sending Message\n\tTry: %d\n\tTotal tries:%d.\n&quot;, try, total_tries);
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">int</span><span style="color: #BBB"> </span>try<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">1</span>;
+<span style="color: #BBB">    </span><span style="color: #B00040">int</span><span style="color: #BBB"> </span>total_tries<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>flags.retries<span style="color: #BBB"> </span><span style="color: #666">+</span><span style="color: #BBB"> </span><span style="color: #666">1</span>;
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">do</span><span style="color: #BBB"> </span>{
+<span style="color: #BBB">        </span>flags.received_message<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #008000">false</span>;
+<span style="color: #BBB">        </span>printf(<span style="color: #BA2121">&quot;Sending Message</span><span style="color: #AA5D1F; font-weight: bold">\n\t</span><span style="color: #BA2121">Try: %d</span><span style="color: #AA5D1F; font-weight: bold">\n\t</span><span style="color: #BA2121">Total tries:%d.</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #BBB"> </span>try,<span style="color: #BBB"> </span>total_tries);
 
-        if (sendto(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, sizeof(peer_addr)) &lt; 0) {
-            perror(&quot;Sending message failure.&quot;);
-            close_socket(udp_socket);
-            return NULL;
-        }
+<span style="color: #BBB">        </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(sendto(udp_socket,<span style="color: #BBB"> </span>payload,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span>),<span style="color: #BBB"> </span><span style="color: #666">0</span>,<span style="color: #BBB"> </span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">sockaddr</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)<span style="color: #666">&amp;</span>peer_addr,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(peer_addr))<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span>perror(<span style="color: #BA2121">&quot;Sending message failure.&quot;</span>);
+<span style="color: #BBB">            </span>close_socket(udp_socket);
+<span style="color: #BBB">            </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
+<span style="color: #BBB">        </span>}
 
-        if (flags.wait_for_answer) {
-            int ret;
-            fd_set readfds;
-            struct timeval timeout;
-            timeout.tv_sec = flags.timeout;
-            timeout.tv_usec = 0;
+<span style="color: #BBB">        </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(flags.wait_for_answer)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">            </span><span style="color: #B00040">int</span><span style="color: #BBB"> </span>ret;
+<span style="color: #BBB">            </span>fd_set<span style="color: #BBB"> </span>readfds;
+<span style="color: #BBB">            </span><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">timeval</span><span style="color: #BBB"> </span>timeout;
+<span style="color: #BBB">            </span>timeout.tv_sec<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>flags.timeout;
+<span style="color: #BBB">            </span>timeout.tv_usec<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">0</span>;
 
-            FD_ZERO(&amp;readfds);
-            FD_SET(udp_socket, &amp;readfds);
+<span style="color: #BBB">            </span>FD_ZERO(<span style="color: #666">&amp;</span>readfds);
+<span style="color: #BBB">            </span>FD_SET(udp_socket,<span style="color: #BBB"> </span><span style="color: #666">&amp;</span>readfds);
 
-            printf(&quot;\tEsperando resposta do servidor...\n&quot;);
-            ret = select(udp_socket + 1, &amp;readfds, NULL, NULL, &amp;timeout);
+<span style="color: #BBB">            </span>printf(<span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">Esperando resposta do servidor...</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #BBB">            </span>ret<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>select(udp_socket<span style="color: #BBB"> </span><span style="color: #666">+</span><span style="color: #BBB"> </span><span style="color: #666">1</span>,<span style="color: #BBB"> </span><span style="color: #666">&amp;</span>readfds,<span style="color: #BBB"> </span><span style="color: #008000">NULL</span>,<span style="color: #BBB"> </span><span style="color: #008000">NULL</span>,<span style="color: #BBB"> </span><span style="color: #666">&amp;</span>timeout);
 
-            if (ret &lt; 0) {
-                perror(&quot;Error during select.&quot;);
-                close_socket(udp_socket);
-                return NULL;
-            } else if (ret == 0) {
-                printf(&quot;\tOtempo expirou e não houve reposta do servidor.\n&quot;);
-                try++;
-            } else {
-                flags.received_message = true;
-            }
-        }
-    } while (try &lt;= total_tries &amp;&amp; !flags.received_message);
-</code></pre>
+<span style="color: #BBB">            </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(ret<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span>perror(<span style="color: #BA2121">&quot;Error during select.&quot;</span>);
+<span style="color: #BBB">                </span>close_socket(udp_socket);
+<span style="color: #BBB">                </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
+<span style="color: #BBB">            </span>}<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(ret<span style="color: #BBB"> </span><span style="color: #666">==</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span>printf(<span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">Otempo expirou e não houve reposta do servidor.</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #BBB">                </span>try<span style="color: #666">++</span>;
+<span style="color: #BBB">            </span>}<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #BBB"> </span>{
+<span style="color: #BBB">                </span>flags.received_message<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #008000">true</span>;
+<span style="color: #BBB">            </span>}
+<span style="color: #BBB">        </span>}
+<span style="color: #BBB">    </span>}<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">while</span><span style="color: #BBB"> </span>(try<span style="color: #BBB"> </span><span style="color: #666">&lt;=</span><span style="color: #BBB"> </span>total_tries<span style="color: #BBB"> </span><span style="color: #666">&amp;&amp;</span><span style="color: #BBB"> </span><span style="color: #666">!</span>flags.received_message);
+</code></pre></div>
 <h5 id="5-recebimento-da-resposta">5. <strong>Recebimento da Resposta</strong></h5>
 <ul>
 <li>Quando uma resposta do servidor é recebida, o código a processa com a função <a href="https://www.gta.ufrj.br/ensino/eel878/sockets/recvman.html"><code>recvfrom()</code></a>.</li>
 <li>O tamanho dos dados recebidos é comparado com o tamanho esperado de um pacote SNTP.</li>
 <li>Se a quantidade de dados recebidos for menor do que o esperado, um erro é gerado e o socket é fechado.</li>
 </ul>
-<pre><code class="language-c"> if (flags.received_message) {
-        socklen_t addr_len = sizeof(peer_addr);
-        ssize_t received_bytes = recvfrom(udp_socket, payload, sizeof(struct ntp_packet), 0, (struct sockaddr *)&amp;peer_addr, &amp;addr_len);
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(flags.received_message)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">        </span><span style="color: #B00040">socklen_t</span><span style="color: #BBB"> </span>addr_len<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(peer_addr);
+<span style="color: #BBB">        </span><span style="color: #B00040">ssize_t</span><span style="color: #BBB"> </span>received_bytes<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>recvfrom(udp_socket,<span style="color: #BBB"> </span>payload,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span>),<span style="color: #BBB"> </span><span style="color: #666">0</span>,<span style="color: #BBB"> </span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">sockaddr</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)<span style="color: #666">&amp;</span>peer_addr,<span style="color: #BBB"> </span><span style="color: #666">&amp;</span>addr_len);
 
-      if (received_bytes &lt; 0) {
-          perror(&quot;Error receiving message.&quot;);
-          close_socket(udp_socket);
-          return NULL;
-      } else if (received_bytes &lt; (ssize_t)sizeof(struct ntp_packet)) {
-          fprintf(stderr, &quot;Incomplete SNTP packet received (%zd bytes).\n&quot;, received_bytes);
-          close_socket(udp_socket);
-          return NULL;
-      }
-  }
-</code></pre>
+<span style="color: #BBB">      </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(received_bytes<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">          </span>perror(<span style="color: #BA2121">&quot;Error receiving message.&quot;</span>);
+<span style="color: #BBB">          </span>close_socket(udp_socket);
+<span style="color: #BBB">          </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
+<span style="color: #BBB">      </span>}<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(received_bytes<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span>(<span style="color: #B00040">ssize_t</span>)<span style="color: #008000; font-weight: bold">sizeof</span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span>))<span style="color: #BBB"> </span>{
+<span style="color: #BBB">          </span>fprintf(stderr,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Incomplete SNTP packet received (%zd bytes).</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #BBB"> </span>received_bytes);
+<span style="color: #BBB">          </span>close_socket(udp_socket);
+<span style="color: #BBB">          </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
+<span style="color: #BBB">      </span>}
+<span style="color: #BBB">  </span>}
+</code></pre></div>
 <h5 id="6-fechamento-do-socket">6. <strong>Fechamento do Socket</strong></h5>
 <ul>
 <li>Após o envio ou recebimento da mensagem, o socket é fechado com a função <code>close_socket()</code>.</li>
 <li>A função <a href="https://man7.org/linux/man-pages/man2/close.2.html"><code>close_socket()</code></a> garante que o socket seja fechado corretamente, liberando os recursos do sistema.</li>
 </ul>
-<pre><code class="language-c">int close_socket(int socket)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">int</span><span style="color: #BBB"> </span><span style="color: #00F">close_socket</span>(<span style="color: #B00040">int</span><span style="color: #BBB"> </span>socket)
 {
-    if (close(socket) &lt; 0)
-    {
-        perror(&quot;Error closing socket.&quot;);
-        return EXIT_FAILURE;
-    }
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(close(socket)<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)
+<span style="color: #BBB">    </span>{
+<span style="color: #BBB">        </span>perror(<span style="color: #BA2121">&quot;Error closing socket.&quot;</span>);
+<span style="color: #BBB">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span>EXIT_FAILURE;
+<span style="color: #BBB">    </span>}
 
-    return EXIT_SUCCESS;
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span>EXIT_SUCCESS;
 }
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="exemplo-de-uso-da-biblioteca-udp">Exemplo de uso da biblioteca UDP</h5>
-<pre><code class="language-c">struct send_message_flags flags = {.wait_for_answer = true, .timeout = 20, .retries = 1};
-struct ntp_packet ntp_packet;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">send_message_flags</span><span style="color: #BBB"> </span>flags<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{.wait_for_answer<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #008000">true</span>,<span style="color: #BBB"> </span>.timeout<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">20</span>,<span style="color: #BBB"> </span>.retries<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">1</span>};
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span><span style="color: #BBB"> </span>ntp_packet;
 
-memset(&amp;ntp_packet, 0, sizeof(ntp_packet));
-ntp_packet.li_vn_mode = 0x1B;
+memset(<span style="color: #666">&amp;</span>ntp_packet,<span style="color: #BBB"> </span><span style="color: #666">0</span>,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(ntp_packet));
+ntp_packet.li_vn_mode<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">0x1B</span>;
 
-struct ntp_packet *response = (struct ntp_packet *)send_message(server_ip, 123, (void *)&amp;ntp_packet, flags);
-</code></pre>
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span><span style="color: #BBB"> </span><span style="color: #666">*</span>response<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)send_message(server_ip,<span style="color: #BBB"> </span><span style="color: #666">123</span>,<span style="color: #BBB"> </span>(<span style="color: #B00040">void</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)<span style="color: #666">&amp;</span>ntp_packet,<span style="color: #BBB"> </span>flags);
+</code></pre></div>
 <hr />
 <h3 id="parseamento-e-recebimento-da-mensagem">Parseamento e Recebimento da Mensagem</h3>
 <p>Após o recebimento da mensagem enviada pelo servidor, a mensagem é processada e parseada. O objetivo é garantir que os dados retornados pelo servidor estejam no formato esperado do protocolo SNTP e, em caso de falha, tratar os erros adequadamente.</p>
@@ -286,13 +286,13 @@ struct ntp_packet *response = (struct ntp_packet *)send_message(server_ip, 123, 
 <li>A função utiliza <code>recvfrom()</code> para capturar os dados enviados pelo servidor.</li>
 <li>Antes de processar a mensagem, o tamanho dos dados recebidos é validado para garantir conformidade com o tamanho mínimo esperado para um pacote SNTP.</li>
 </ul>
-<pre><code class="language-c">int received_bytes = recvfrom(udp_socket, buffer, sizeof(buffer), 0, NULL, NULL);
-if (received_bytes &lt; sizeof(struct ntp_packet)) {
-    fprintf(stderr, &quot;Pacote SNTP inválido ou incompleto recebido.\n&quot;);
-    close(udp_socket);
-    return NULL;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">int</span><span style="color: #BBB"> </span>received_bytes<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>recvfrom(udp_socket,<span style="color: #BBB"> </span>buffer,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(buffer),<span style="color: #BBB"> </span><span style="color: #666">0</span>,<span style="color: #BBB"> </span><span style="color: #008000">NULL</span>,<span style="color: #BBB"> </span><span style="color: #008000">NULL</span>);
+<span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(received_bytes<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span>))<span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span>fprintf(stderr,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Pacote SNTP inválido ou incompleto recebido.</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #BBB">    </span>close(udp_socket);
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
 }
-</code></pre>
+</code></pre></div>
 <h4 id="2-validando-o-formato-do-pacote">2. <strong>Validando o Formato do Pacote</strong></h4>
 <ul>
 <li>O pacote recebido é interpretado como uma estrutura <code>ntp_packet</code>.</li>
@@ -300,13 +300,13 @@ if (received_bytes &lt; sizeof(struct ntp_packet)) {
 <li>O campo <strong><code>li_vn_mode</code></strong> é usado para verificar a versão do protocolo e o modo de operação.</li>
 <li>Outros campos, como <strong><code>stratum</code></strong> e <strong><code>precision</code></strong>, são analisados para determinar se o servidor está sincronizado corretamente.</li>
 </ul>
-<pre><code class="language-c">struct ntp_packet *response = (struct ntp_packet *)buffer;
-if ((response-&gt;li_vn_mode &amp; 0x07) != 4) { // Verifica se o modo é Server (4)
-    fprintf(stderr, &quot;Resposta recebida não está no modo esperado (Server).\n&quot;);
-    close(udp_socket);
-    return NULL;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span><span style="color: #BBB"> </span><span style="color: #666">*</span>response<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>(<span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">ntp_packet</span><span style="color: #BBB"> </span><span style="color: #666">*</span>)buffer;
+<span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>((response<span style="color: #666">-&gt;</span>li_vn_mode<span style="color: #BBB"> </span><span style="color: #666">&amp;</span><span style="color: #BBB"> </span><span style="color: #666">0x07</span>)<span style="color: #BBB"> </span><span style="color: #666">!=</span><span style="color: #BBB"> </span><span style="color: #666">4</span>)<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #3D7B7B; font-style: italic">// Verifica se o modo é Server (4)</span>
+<span style="color: #BBB">    </span>fprintf(stderr,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Resposta recebida não está no modo esperado (Server).</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #BBB">    </span>close(udp_socket);
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
 }
-</code></pre>
+</code></pre></div>
 <h4 id="3-extracao-de-dados-de-tempo">3. <strong>Extração de Dados de Tempo</strong></h4>
 <ul>
 <li>A partir do pacote SNTP, os timestamps relevantes são extraídos:</li>
@@ -318,38 +318,38 @@ if ((response-&gt;li_vn_mode &amp; 0x07) != 4) { // Verifica se o modo é Server
 <p>Os timestamps são convertidos para um formato legível (e.g., UNIX Epoch) para cálculos adicionais:</p>
 </li>
 </ul>
-<pre><code class="language-c">uint32_t server_time = ntohl(response-&gt;txTm_s); // Converte para a ordem de bytes do host
-server_time -= 2208988800U; // Ajusta para o Epoch UNIX (1970)
-printf(&quot;Horário recebido do servidor: %u\n&quot;, server_time);
-</code></pre>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #B00040">uint32_t</span><span style="color: #BBB"> </span>server_time<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>ntohl(response<span style="color: #666">-&gt;</span>txTm_s);<span style="color: #BBB"> </span><span style="color: #3D7B7B; font-style: italic">// Converte para a ordem de bytes do host</span>
+server_time<span style="color: #BBB"> </span><span style="color: #666">-=</span><span style="color: #BBB"> </span><span style="color: #666">2208988800U</span>;<span style="color: #BBB"> </span><span style="color: #3D7B7B; font-style: italic">// Ajusta para o Epoch UNIX (1970)</span>
+printf(<span style="color: #BA2121">&quot;Horário recebido do servidor: %u</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #BBB"> </span>server_time);
+</code></pre></div>
 <h4 id="4conversao-de-data-e-hora-em-portugues">4.<strong>Conversão de Data e Hora em Português</strong></h4>
 <ul>
 <li>Foi feita uma tradução da data e hora para o português, através do código a seguir que converte a "data/hora" do formato struct tm para uma string com nomes de dias da semana e meses traduzidos para português.</li>
 </ul>
-<pre><code class="language-c">struct tm *tm_info = localtime(&amp;tx_time);
-const char *dias_da_semana_pt[] = {&quot;Dom&quot;, &quot;Seg&quot;, &quot;Ter&quot;, &quot;Qua&quot;, &quot;Qui&quot;, &quot;Sex&quot;, &quot;Sáb&quot;};
-const char *meses_pt[] = {&quot;Jan&quot;, &quot;Fev&quot;, &quot;Mar&quot;, &quot;Abr&quot;, &quot;Mai&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Ago&quot;, &quot;Set&quot;, &quot;Out&quot;, &quot;Nov&quot;, &quot;Dez&quot;};
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">struct</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">tm</span><span style="color: #BBB"> </span><span style="color: #666">*</span>tm_info<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>localtime(<span style="color: #666">&amp;</span>tx_time);
+<span style="color: #008000; font-weight: bold">const</span><span style="color: #BBB"> </span><span style="color: #B00040">char</span><span style="color: #BBB"> </span><span style="color: #666">*</span>dias_da_semana_pt[]<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BA2121">&quot;Dom&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Seg&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Ter&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Qua&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Qui&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Sex&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Sáb&quot;</span>};
+<span style="color: #008000; font-weight: bold">const</span><span style="color: #BBB"> </span><span style="color: #B00040">char</span><span style="color: #BBB"> </span><span style="color: #666">*</span>meses_pt[]<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BA2121">&quot;Jan&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Fev&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Mar&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Abr&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Mai&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Jun&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Jul&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Ago&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Set&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Out&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Nov&quot;</span>,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Dez&quot;</span>};
 
-char dia_semana[4];
-strftime(dia_semana, sizeof(dia_semana), &quot;%a&quot;, tm_info);
-for (int i = 0; i &lt; 7; i++) {
-    if (strcmp(dia_semana, &quot;Sun&quot;) == 0) strcpy(dia_semana, dias_da_semana_pt[0]);
-    // Outras comparações semelhantes...
+<span style="color: #B00040">char</span><span style="color: #BBB"> </span>dia_semana[<span style="color: #666">4</span>];
+strftime(dia_semana,<span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(dia_semana),<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;%a&quot;</span>,<span style="color: #BBB"> </span>tm_info);
+<span style="color: #008000; font-weight: bold">for</span><span style="color: #BBB"> </span>(<span style="color: #B00040">int</span><span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #666">0</span>;<span style="color: #BBB"> </span>i<span style="color: #BBB"> </span><span style="color: #666">&lt;</span><span style="color: #BBB"> </span><span style="color: #666">7</span>;<span style="color: #BBB"> </span>i<span style="color: #666">++</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(strcmp(dia_semana,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Sun&quot;</span>)<span style="color: #BBB"> </span><span style="color: #666">==</span><span style="color: #BBB"> </span><span style="color: #666">0</span>)<span style="color: #BBB"> </span>strcpy(dia_semana,<span style="color: #BBB"> </span>dias_da_semana_pt[<span style="color: #666">0</span>]);
+<span style="color: #BBB">    </span><span style="color: #3D7B7B; font-style: italic">// Outras comparações semelhantes...</span>
 }
-</code></pre>
+</code></pre></div>
 <h4 id="5-tratamento-de-erros">5. <strong>Tratamento de Erros</strong></h4>
 <ul>
 <li>Em caso de erro no parseamento ou validação:</li>
 <li>Uma mensagem de erro é registrada no log.</li>
 <li>O socket é fechado e a função retorna <code>NULL</code>.</li>
 </ul>
-<p>Exemplo de erro ao processar um campo inválido:</p>
-<pre><code class="language-c">if (response-&gt;stratum == 0 || response-&gt;stratum &gt; 16) {
-    fprintf(stderr, &quot;Servidor não sincronizado ou resposta inválida.\n&quot;);
-    close(udp_socket);
-    return NULL;
+<p>Exemplo de erro ao processar um campo inválido:
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000; font-weight: bold">if</span><span style="color: #BBB"> </span>(response<span style="color: #666">-&gt;</span>stratum<span style="color: #BBB"> </span><span style="color: #666">==</span><span style="color: #BBB"> </span><span style="color: #666">0</span><span style="color: #BBB"> </span><span style="color: #666">||</span><span style="color: #BBB"> </span>response<span style="color: #666">-&gt;</span>stratum<span style="color: #BBB"> </span><span style="color: #666">&gt;</span><span style="color: #BBB"> </span><span style="color: #666">16</span>)<span style="color: #BBB"> </span>{
+<span style="color: #BBB">    </span>fprintf(stderr,<span style="color: #BBB"> </span><span style="color: #BA2121">&quot;Servidor não sincronizado ou resposta inválida.</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #BBB">    </span>close(udp_socket);
+<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #BBB"> </span><span style="color: #008000">NULL</span>;
 }
-</code></pre>
+</code></pre></div></p>
 <hr />
 <h3 id="comportamento-em-caso-de-falha">Comportamento em Caso de Falha</h3>
 <ul>

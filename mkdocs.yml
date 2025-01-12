@@ -1,7 +1,13 @@
 site_name: TP1 [Fundamentos de Redes de Computadores]
 
+markdown_extensions:
+  - pymdownx.superfences         # required extension
+  - pymdownx.highlight:
+      use_pygments: true         # use pygments library    
+      pygments_style: github-dark    # use 'default' style
+      noclasses: true            # update HTML style attr
+  - pymdownx.inlinehilite        # style inline code
+
 theme:
   name: terminal
   palette: dark
-
-repo_url: https://github.com/dev-brito/sntp-project
